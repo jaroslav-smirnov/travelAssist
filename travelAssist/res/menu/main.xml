@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/item_add" android:title="@string/tbtnAdd" android:showAsAction="ifRoom" android:icon="@android:drawable/ic_menu_add"></item>
+    <item android:id="@+id/item_edit" android:title="@string/tBtnEdit" android:showAsAction="ifRoom" android:icon="@android:drawable/ic_menu_edit"></item>
+    <item android:id="@+id/item_remove" android:title="@string/tBtnDelete" android:showAsAction="ifRoom" android:icon="@android:drawable/ic_menu_delete"></item>
+<item android:id="@+id/item_help" android:title="@string/str_help_item" android:showAsAction="ifRoom" android:icon="@android:drawable/ic_menu_help"></item>  
+</menu>

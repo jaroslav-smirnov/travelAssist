@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Shared Trip Calc</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="labPersons">People</string>
+    <string name="labTrips">Trips</string>
+    <string name="labReceipts">Receipts</string>
+    <string name="strValue">Value:</string>
+    <string name="strCurrency">Currency:</string>
+    <string name="strWhoBuy">Who buy:</string>
+    <string name="strWhoUse">Who use:</string>
+    <string name="strNameOfTrip">Name:</string>
+    <string name="strUsersOfTrip">Travellers:</string>
+    <string name="strNameOfPerson">Name:</string>
+    <string name="labCurrences">Currencies</string>
+    <string name="strCurrencyName">Name: i.e US Dollar</string>
+    <string name="strCurrencyShortName">Short name: i.e USD</string>
+    <string name="strConvertionToEur">Ratio to main currency</string>
+    <string name="tbtnAdd">Add</string>
+    <string name="tBtnEdit">Edit</string>
+    <string name="tBtnDelete">Delete</string>
+    <string name="tbtnAccept">Accept</string>
+    <string name="tbtnDecline">Decline</string>
+    <string name="secBasicInfo">Basic information:</string>
+    <string name="secCurrencyConvertion">Currency conversion:</string>
+    <string name="strTravelId">Journey</string>
+    <string name="remove_for_notify">Remove?</string>
+    <string name="remove_for_notify_text">Are you sure that you want to remove item?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="contextRemove">Remove</string>
+    <string name="contextEdit">Edit</string>
+     <string name="accept">Accept</string>
+      <string name="strOk">OK</string>
+      <string name="decline">Decline</string>
+        <string name="to_string">To:</string>
+        <string name="from_string">From:</string>
+        <string name="str_select_item_to_edit">Select item to edit</string>
+        <string name="str_select_item_to_remove">Select item to remove</string>      
+    <string-array name="delete_problems">
+        <item >--</item>
+        <item >Unable to delete. Trip is used in receipts</item>
+        <item >Unable to delete. Person is used in travels</item>
+        <item >Unable to delete. Currency is used in receipts</item>
+    </string-array>
+        <string name="strDescription">Description:</string>
+        <string name="toast_person_is_used">Unable to uncheck. Unchecked person was used in receipts.</string>
+        <string name="name_is_empty">Unable to save. Name is empty</string>
+        <string name="no_action_on_tap_label">No action on tap. Use menu or long tap to edit or remove</string>
+        <string name="tap_on_item_to_show_calculation">Tap on item to show trip calculation</string>
+        <string name="select_item_to_edit_label">Select item to edit</string>
+        <string name="select_item_to_remove_label">Select item to remove</string>
+        <string name="toast_fill_all_of_the_strings">Unable to save. Fill all fields</string>
+        <string name="select_at_least_two_people">Unable to save. Select at least two people</string>
+        <string name="toast_fill_value_string">Unable to save. Please fill value field</string>
+        <string name="toast_select_at_least_one_person">Unable to save. Select at least one person</string>
+        <string-array name="dontshow">
+            <item >Don\'t show this message again.</item>
+        </string-array>
+        <string name="total_str">Total: </string>
+        <string name="str_insert_basic_value">Insert your basic value</string>
+         <string name="str_fill_fields">Please fill the fields</string>
+         <string name="strUsedIn">Used in:</string>
+         <string name="str_was_buyer">Bought (times):</string>
+         <string name="str_use_times">Used (times):</string>
+         <string name="str_total_spent">Total spent:</string>
+         <string name="str_are_you_sure">Are you sure that you want to quit?</string>
+         <string name="str_quit_label">Quit</string>
+         <string name="str_changes_save">Changes wasn\'t save. Continue?</string>
+         <string name="str_select_all">Select all</string>
+         <string name="str_help_item">Help</string>
+         <string name="str_help_text">Travel assist is a simple application that helps you to calculate your money in trips. When you are travelling with your friends somebody always pays for others. This app helps to avoid this situation now you could calculate money/</string>
+			<string name="str_add_people">Add people</string>
+			<string name="str_add_trips">Add trips</string>
+			<string name="str_add">Add</string>
+			<string name="str_continue">Continue</string>
+			<string name="str_finish">Finish</string>
+			<string name="first_st_not_caption">Add data</string>
+			<string name="first_st_people">To work with app you should add at least two people</string>
+			<string name="first_st_travel">To work with app you should add at first travel</string>
+			<string name="first_st_receipts">To calculate data you should add receipts</string>
+			
+</resources>

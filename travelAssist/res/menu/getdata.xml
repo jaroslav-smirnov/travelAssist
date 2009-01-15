@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/item_accept" android:title="@string/tbtnAccept" android:showAsAction="always" android:icon="@android:drawable/ic_menu_save"></item>
+    <item android:id="@+id/item_reset" android:title="@string/tbtnDecline" android:icon="@android:drawable/ic_menu_close_clear_cancel" android:showAsAction="always"></item>
+
+</menu>
