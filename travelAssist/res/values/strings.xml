@@ -26,7 +26,7 @@
     <string name="tbtnDecline">Decline</string>
     <string name="secBasicInfo">Basic information:</string>
     <string name="secCurrencyConvertion">Currency conversion:</string>
-    <string name="strTravelId">Journey</string>
+    <string name="strTravelId">Trip</string>
     <string name="remove_for_notify">Remove?</string>
     <string name="remove_for_notify_text">Are you sure that you want to remove item?</string>
     <string name="no">No</string>
@@ -72,7 +72,7 @@
          <string name="str_changes_save">Changes wasn\'t save. Continue?</string>
          <string name="str_select_all">Select all</string>
          <string name="str_help_item">Help</string>
-         <string name="str_help_text">Travel assist is a simple application that helps you to calculate your money in trips. When you are travelling with your friends somebody always pays for others. This app helps to avoid this situation now you could calculate money/</string>
+         <string name="str_help_text">1. To view calculation tap on nessecary trip in trips. \n2.Work with application. At first you should add currencies. After that add people. Now you can create trip. To make trip you should have at least two people. After trip creation you can add receipts to calculation. Now tap on trip and you will see the calculation.</string>
 			<string name="str_add_people">Add people</string>
 			<string name="str_add_trips">Add trips</string>
 			<string name="str_add">Add</string>
