@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">Shared Trip Calc</string>
+	<string name="app_name">Shared Trip Calc</string>
     <string name="action_settings">Settings</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
@@ -44,7 +43,7 @@
     <string-array name="delete_problems">
         <item >--</item>
         <item >Unable to delete. Trip is used in receipts</item>
-        <item >Unable to delete. Person is used in travels</item>
+        <item >Unable to delete. Person is used in trips</item>
         <item >Unable to delete. Currency is used in receipts</item>
     </string-array>
         <string name="strDescription">Description:</string>
