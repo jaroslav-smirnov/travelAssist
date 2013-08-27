@@ -266,7 +266,7 @@ public class addBuy extends Activity implements OnItemSelectedListener, OnClickL
 		
 		
 		
-		SAIcurrencies= fillSpinner("currency", "shortname", R.id.spinner1);
+		SAIcurrencies= fillSpinnerReverse("currency", "shortname", R.id.spinner1);
 		
 		SAIjourneys = fillSpinner("travels", "name", R.id.spinner3);
 		if (type == 8)
@@ -306,7 +306,8 @@ public class addBuy extends Activity implements OnItemSelectedListener, OnClickL
 				array_spinner1[i] = cur.getString(idNameIndex);
 				trIndexStorage[i] = cur.getInt(idColIndex);
 				
-				array_spinner1[i]+=":"+String.valueOf(trIndexStorage[i]);
+				//array_spinner1[i]+=":"+String.valueOf(trIndexStorage[i]);
+				//array_spinner1[i] = String.valueOf(trIndexStorage[i]);
 				//Log.d("dsfds", array_spinner1[i]);
 				i++;
 			} while (cur.moveToPrevious());
@@ -400,11 +401,54 @@ return true;
 			do {
 				dataContainer [i] = new stringAndId (cur.getInt(idColIndex),cur.getString(idNameIndex));
 				array_spinner1[i] = cur.getString(idNameIndex);
-				array_spinner1[i]+=":"+String.valueOf(dataContainer[i].getid());
+				/*array_spinner1[i]+=":"+String.valueOf(dataContainer[i].getid());*/
 				//Log.d("dsfds", array_spinner1[i]);
 			    //dataContainer[i] = cur.getInt(idColIndex);
+				//array_spinner1[i]+=String.valueOf(dataContainer[i].getid());
 				i++;
 			} while (cur.moveToPrevious());
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+					android.R.layout.simple_spinner_item, array_spinner1);
+			adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+			spnr.setAdapter(adapter);
+			spnr.setPrompt("hello");
+		} else
+			Log.d("db", "No records in curr");
+
+		cur.close();
+		db.close();
+		return dataContainer;
+	}
+	
+	public stringAndId [] fillSpinnerReverse(String table, String field, int spinId) {
+
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+		Cursor cur = db.query(table, null, null, null, null, null, null);
+		
+		stringAndId dataContainer[] = new stringAndId [cur.getCount()];
+
+		Spinner spnr = (Spinner) findViewById(spinId);
+
+		//Log.d("jhgjg", "start to work with db");
+
+		if (cur.moveToFirst()) {
+			int idColIndex = cur.getColumnIndex("id");
+			int idNameIndex = cur.getColumnIndex(field);
+				//trIndexStorage = new int[cur.getCount()];
+			// cur.getCount();
+			String array_spinner1[];
+			int i = 0;
+			array_spinner1 = new String[cur.getCount()];
+			do {
+				dataContainer [i] = new stringAndId (cur.getInt(idColIndex),cur.getString(idNameIndex));
+				array_spinner1[i] = cur.getString(idNameIndex);
+				/*array_spinner1[i]+=":"+String.valueOf(dataContainer[i].getid());*/
+				//Log.d("dsfds", array_spinner1[i]);
+			    //dataContainer[i] = cur.getInt(idColIndex);
+				//array_spinner1[i]+=String.valueOf(dataContainer[i].getid());
+				i++;
+			} while (cur.moveToNext());
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 					android.R.layout.simple_spinner_item, array_spinner1);
 			adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -449,7 +493,7 @@ return true;
 					
 					Log.d("we send to data", array_spinner1[j] + peopleId[j] + ":"+ j);
 					
-					array_spinner1[j] += ":" + String.valueOf(peopleId[j]);
+					//array_spinner1[j] += ":" + String.valueOf(peopleId[j]);
 					
 					//Log.d("dsfds", array_spinner1[j]);
 				//} while (cur.moveToPrevious());
@@ -661,7 +705,7 @@ return true;
 		else
 			db.update("buys", cv, "id = " + id, null);
 		//Log.d("dsfdsf", "New receipt added " + String.valueOf());
-        Toast.makeText(getApplicationContext(), "Buyer is "+ peopleId[(int) spWho.getSelectedItemId()], Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Buyer is "+ peopleId[(int) spWho.getSelectedItemId()], Toast.LENGTH_SHORT).show();
 		db.close();
 		return true;
 	}

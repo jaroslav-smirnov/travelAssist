@@ -51,8 +51,8 @@ public class ShowTravel extends FragmentActivity implements ItemRemovable {
 		dbHelper = new DBHelper(this);
 		idInList = intent.getIntExtra("travelId", 0);
 		Type = getIdByPos(idInList);
-		Toast.makeText(getApplicationContext(), String.valueOf(Type),
-				Toast.LENGTH_LONG).show();
+		/*Toast.makeText(getApplicationContext(), String.valueOf(Type),
+				Toast.LENGTH_LONG).show();*/
 
 		Receipt staRec = new Receipt();
 

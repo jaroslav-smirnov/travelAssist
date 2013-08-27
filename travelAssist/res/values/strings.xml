@@ -81,7 +81,9 @@
 			<string name="str_finish">Finish</string>
 			<string name="first_st_not_caption">Add data</string>
 			<string name="first_st_people">To work with app you should add at least two people</string>
-			<string name="first_st_travel">To work with app you should add at first travel</string>
-			<string name="first_st_receipts">To calculate data you should add receipts</string>
+			<string name="first_st_travel">To work with app you should add at first trip</string>
+			<string name="first_st_receipts">Now add receipts please</string>
+			<string name="first_st_view_calculation">To view calculation tap the trip</string>
+			<string name="first_st_view_caption">View results</string>
 			
 </resources>

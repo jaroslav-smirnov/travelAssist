@@ -115,13 +115,13 @@ public class DBHelper extends SQLiteOpenHelper {
 			Tables table) {
 		switch (table) {
 		case BUYS:
-			return getAdapter(ctx, db, Tables.BUYS, "0,1,2", "3,4");
+			return getAdapter(ctx, db, Tables.BUYS, "1,2", "3,4");
 		case TRIPS:
-			return getAdapter(ctx, db, Tables.TRIPS, "0,1", "");
+			return getAdapter(ctx, db, Tables.TRIPS, "1", "");
 		case PERSONS:
-			return getAdapter(ctx, db, Tables.PERSONS, "0,1", "");
+			return getAdapter(ctx, db, Tables.PERSONS, "1", "");
 		case CURRENCIES:
-			return getAdapter(ctx, db, Tables.CURRENCIES, "0,2,3", "1");
+			return getAdapter(ctx, db, Tables.CURRENCIES, "2,3", "1");
 		default:
 			throw new RuntimeException("Not valid tablename");
 

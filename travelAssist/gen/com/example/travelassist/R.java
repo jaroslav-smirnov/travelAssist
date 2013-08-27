@@ -93,6 +93,8 @@ public final class R {
         public static final int first_st_people=0x7f060046;
         public static final int first_st_receipts=0x7f060048;
         public static final int first_st_travel=0x7f060047;
+        public static final int first_st_view_calculation=0x7f060049;
+        public static final int first_st_view_caption=0x7f06004a;
         public static final int from_string=0x7f060025;
         public static final int labCurrences=0x7f06000f;
         public static final int labPersons=0x7f060005;

@@ -159,15 +159,12 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	public static void posChanged(int position) {
-		// Toast.makeText(getMainActivity(), ""+position,
-		// Toast.LENGTH_SHORT).show();
 		tabPosition = position;
 		Log.i("tag3", "position is " + position);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
@@ -178,6 +175,7 @@ public class MainActivity extends FragmentActivity implements
 		case R.id.item_add: {
 			editNow = false;
 			deleteNow = false;
+			actionBar.setDisplayShowTitleEnabled(false);
 			if (!helpActions(tabPosition))
 				return false;
 			Intent intent = new Intent(this, addBuy.class);
@@ -205,10 +203,10 @@ public class MainActivity extends FragmentActivity implements
 		}
 			return true;
 		case R.id.item_help: {
+			actionBar.setDisplayShowTitleEnabled(false);
 			editNow = false;
 			deleteNow = false;
 			Intent intent = new Intent(this, HelpWindowClass.class);
-			// intent.putExtra("typeOfAdd", tabPosition);
 			startActivity(intent);
 
 		}
@@ -221,8 +219,6 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	protected void onStop() {
-		Log.d("tag5", "" + useCount);
-
 		this.setNoFirst();
 		super.onStop();
 	}
@@ -233,7 +229,10 @@ public class MainActivity extends FragmentActivity implements
 		editNow = false;
 		updateView();
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		getStartPosition(db);
+		int posToAdd = -1;
+		if (useCount < 5) posToAdd = getStartPosition(db);
+		if (posToAdd > -1)
+			mViewPager.setCurrentItem(posToAdd);
 		db.close();
 		if (RequestCode == 15) {
 
@@ -281,7 +280,6 @@ public class MainActivity extends FragmentActivity implements
 		Tables[] tbl = new Tables[] { Tables.BUYS, Tables.TRIPS,
 				Tables.PERSONS, Tables.CURRENCIES };
 
-		// View fragmentView = fragmentArray[tabPosition].getView();
 		Fragment curFrag = getSupportFragmentManager().findFragmentByTag(
 				mSectionsPagerAdapter.getActiveFragmentTag(mViewPager,
 						tabPosition));
@@ -294,26 +292,21 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	public void onTabSelected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
-		// When the given tab is selected, switch to the corresponding page in
-		// the ViewPager.
-		// Toast.makeText(this, ""+tab.getPosition(),
-		// Toast.LENGTH_SHORT).show();
 		if (useCount < 5)
 			helpActions(tab.getPosition());
 		mViewPager.setCurrentItem(tab.getPosition());
 	}
 
 	private boolean helpActions(int pos) {
-		int prev = pos == 0 ? 3 : pos - 1;
+		//int prev = pos == 0 ? 3 : pos - 1;
 		int next = pos == 3 ? 0 : pos + 1;
 
 		Tables[] tbl = new Tables[] { Tables.BUYS, Tables.TRIPS,
 				Tables.PERSONS, Tables.CURRENCIES };
 
-		Log.d("tag5", "pos is " + pos + " next is " + next + " prev is " + prev);
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		int count = DBHelper.getCursor(tbl[next], db).getCount();
-		Log.d("tag5", "" + "table is " + tbl[next] + " count is " + count);
+		
 		db.close();
 		if ((count == 0) && (pos == 0)) {
 			Toast.makeText(this, R.string.str_add_trips, Toast.LENGTH_SHORT)
@@ -471,11 +464,9 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long arg3) {
-		// Log.d("tag", "I listen but hear nothing");
 		ListAdapter adpr = ((ListView) arg0).getAdapter();
 		int id = ((ExSimpleAdapter) adpr).getIdByPos(position);
-		// Toast.makeText(this, "" + id, Toast.LENGTH_SHORT).show();
-
+		
 		if (deleteNow) {
 
 			RemoveConfirmationDialogFragment newFragment = new RemoveConfirmationDialogFragment();
@@ -746,7 +737,7 @@ public class MainActivity extends FragmentActivity implements
 						.setPositiveButton(R.string.strOk, null).show();
 				return 1;
 			} else {
-				/*cur = DBHelper.getCursor(Tables.TRIPS, db);
+				cur = DBHelper.getCursor(Tables.BUYS, db);
 				if (cur.getCount() == 0) {
 					new AlertDialog.Builder(this)
 							.setIcon(android.R.drawable.ic_dialog_alert)
@@ -754,10 +745,20 @@ public class MainActivity extends FragmentActivity implements
 							.setMessage(R.string.first_st_receipts)
 							.setPositiveButton(R.string.strOk, null).show();
 					return 0;
-				}*/
+				} else {
+					cur = DBHelper.getCursor(Tables.BUYS, db);
+					if (cur.getCount() == 2) {
+						new AlertDialog.Builder(this)
+								.setIcon(android.R.drawable.ic_dialog_alert)
+								.setTitle(R.string.first_st_view_caption)
+								.setMessage(R.string.first_st_view_calculation)
+								.setPositiveButton(R.string.strOk, null).show();
+						return 1;
+					}
+				}
 			}
 		}
-		return 0;
+		return -1;
 	}
 
 	@Override
