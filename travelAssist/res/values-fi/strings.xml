@@ -84,5 +84,5 @@
 			<string name="first_st_receipts">Теперь можно добавить чеки из вашего путешествия</string>
 			<string name="first_st_view_calculation">Для просмотра расчета затрат, нажмите на название путешествия в путешествиях</string>
 			<string name="first_st_view_caption">Просмотр результатов</string>
-			
+			<string name="str_first_value_ratio">Невозможно сохранить базовая величина должна иметь коэффициент 1</string>
 </resources>
