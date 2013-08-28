@@ -133,6 +133,7 @@ public final class R {
         public static final int str_continue=0x7f060043;
         public static final int str_fill_fields=0x7f060035;
         public static final int str_finish=0x7f060044;
+        public static final int str_first_value_ratio=0x7f06004b;
         public static final int str_help_item=0x7f06003e;
         public static final int str_help_text=0x7f06003f;
         public static final int str_insert_basic_value=0x7f060034;

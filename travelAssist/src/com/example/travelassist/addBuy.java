@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class addBuy extends Activity implements OnItemSelectedListener, OnClickListener {
@@ -105,6 +106,13 @@ public class addBuy extends Activity implements OnItemSelectedListener, OnClickL
 		case 3:
 			setContentView(R.layout.new_currency);
 			actionBar.setTitle(R.string.labCurrences);
+			
+			TextView tvCurrency = (TextView)findViewById(R.id.textView2);
+			
+			SQLiteDatabase db = dbHelper.getReadableDatabase();
+			AllCurrencies aCurrency = AllCurrencies.getInstance(db);
+			tvCurrency.setText(aCurrency.getNameById(1));
+			db.close();
 			break;
 		case 8:
 			setContentView(R.layout.add_buy);

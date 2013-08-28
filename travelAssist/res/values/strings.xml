@@ -84,5 +84,6 @@
 			<string name="first_st_receipts">Now add receipts please</string>
 			<string name="first_st_view_calculation">To view calculation tap the trip</string>
 			<string name="first_st_view_caption">View results</string>
+			<string name="str_first_value_ratio">Unable to save. Basic value ratio should be 1</string>
 			
 </resources>

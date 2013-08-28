@@ -139,6 +139,11 @@ public class changePersonAndCurrency extends Activity {
 							Toast.LENGTH_SHORT).show();
 					return super.onOptionsItemSelected(item);
 				}
+				if ((!isPerson)&&(this.id == 1)&&(Float.parseFloat(ratio.getText().toString())!=1.0))
+				{
+					Toast.makeText(this, R.string.str_first_value_ratio, Toast.LENGTH_SHORT).show();
+					return super.onOptionsItemSelected(item);
+				}
 				cur.setRatio(Float.parseFloat(ratio.getText().toString()));
 				cur.writeChanges();
 				}
