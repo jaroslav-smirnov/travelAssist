@@ -104,7 +104,8 @@ public class ReceiptView extends AbstractFragmentActivity {
 		 * Log.i("tab7","all "+allIds.length);
 		 */
 
-		intent.putExtra("id", allIds.length - 1 - curPosPos);
+		//intent.putExtra("id", allIds.length - 1 - curPosPos);
+		intent.putExtra("id", curPosPos);
 		intent.putExtra("typeOfAdd", 8);
 		startActivityForResult(intent, 0);
 	}

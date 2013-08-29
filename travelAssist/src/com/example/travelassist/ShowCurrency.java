@@ -68,7 +68,8 @@ public class ShowCurrency extends AbstractFragmentActivity {
 	@Override
 	protected void itemEdit(int id) {
 		Intent intent = new Intent(this, changePersonAndCurrency.class);
-		intent.putExtra("id", allIds.length - 1 - curPosPos);
+		//intent.putExtra("id", (allIds.length - 1 - curPosPos));
+		intent.putExtra("id", curPosPos);
 		intent.putExtra("isPerson", false);
 		startActivityForResult(intent, 0);
 	}
