@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Расчет общей поездки</string>
+	<string name="app_name">Расчет затрат после поездки</string>
     <string name="action_settings">Settings</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
@@ -72,15 +72,15 @@
          <string name="str_changes_save">Изменения не сохранены. Продолжить?</string>
          <string name="str_select_all">Выбрать все</string>
          <string name="str_help_item">Помощь</string>
-         <string name="str_help_text">1. To view calculation tap on nessecary trip in trips. \n2.Work with application. At first you should add currencies. After that add people. Now you can create trip. To make trip you should have at least two people. After trip creation you can add receipts to calculation. Now tap on trip and you will see the calculation.</string>
+         <string name="str_help_text">1. Для просмотра расчета расходов нажмите на необходимое путешествие в путешествиях. \n2.Работа с приложением. Для начала добавьте валюты. После этого добавьте людей. Теперь вы можете добавлять путешествия. Добавляйте чеки для итогового расчета на вкладке чеки. Для просмотра статистики поездки и итогового расчета нажмите на интересующую Вас поездку во вкладке поездки.</string>
 			<string name="str_add_people">Добавить человека</string>
 			<string name="str_add_trips">Добавить путешествия</string>
 			<string name="str_add">Добавить</string>
 			<string name="str_continue">Продолжить</string>
 			<string name="str_finish">Закончить</string>
 			<string name="first_st_not_caption">Добавление информации</string>
-			<string name="first_st_people">Для работы с приложением необходимо, как минимум два человека</string>
-			<string name="first_st_travel">Для работы с приложением необходимо добавить путешествие</string>
+			<string name="first_st_people">Для работы с приложением необходимо, как минимум два человека. Добавьте их на вкладке люди</string>
+			<string name="first_st_travel">Для работы с приложением необходимо добавить путешествие. Добавьте путешествие на вкладке путешествия</string>
 			<string name="first_st_receipts">Теперь можно добавить чеки из вашего путешествия</string>
 			<string name="first_st_view_calculation">Для просмотра расчета затрат, нажмите на название путешествия в путешествиях</string>
 			<string name="first_st_view_caption">Просмотр результатов</string>
