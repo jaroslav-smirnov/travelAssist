@@ -50,7 +50,7 @@
         <string name="toast_person_is_used">Невозможно исключить человека. Он используется в чеках для данной поездки.</string>
         <string name="name_is_empty">Невозможно сохранить. Заполните имя</string>
         <string name="no_action_on_tap_label">No action on tap. Use menu or long tap to edit or remove</string>
-        <string name="tap_on_item_to_show_calculation">Tap on item to show trip calculation</string>
+        <string name="tap_on_item_to_show_calculation">Tap on item to show trcalculation</string>
         <string name="select_item_to_edit_label">Выберите пункт для редактирования</string>
         <string name="select_item_to_remove_label">Выберите пункт для удаления</string>
         <string name="toast_fill_all_of_the_strings">Невозможно сохранить. Заполните все поля</string>
