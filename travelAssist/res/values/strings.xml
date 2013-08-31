@@ -10,7 +10,7 @@
     <string name="labReceipts">Receipts</string>
     <string name="strValue">Value:</string>
     <string name="strCurrency">Currency:</string>
-    <string name="strWhoBuy">Who buy:</string>
+    <string name="strWhoBuy">Who pay:</string>
     <string name="strWhoUse">Who use:</string>
     <string name="strNameOfTrip">Name:</string>
     <string name="strUsersOfTrip">Travellers:</string>
@@ -18,14 +18,14 @@
     <string name="labCurrences">Currencies</string>
     <string name="strCurrencyName">Name: i.e US Dollar</string>
     <string name="strCurrencyShortName">Short name: i.e USD</string>
-    <string name="strConvertionToEur">Ratio to main currency</string>
+    <string name="strConvertionToEur">Currency rate</string>
     <string name="tbtnAdd">Add</string>
     <string name="tBtnEdit">Edit</string>
     <string name="tBtnDelete">Delete</string>
     <string name="tbtnAccept">Accept</string>
     <string name="tbtnDecline">Decline</string>
     <string name="secBasicInfo">Basic information:</string>
-    <string name="secCurrencyConvertion">Currency conversion:</string>
+    <string name="secCurrencyConvertion">Currency rate:</string>
     <string name="strTravelId">Trip</string>
     <string name="remove_for_notify">Remove?</string>
     <string name="remove_for_notify_text">Are you sure that you want to remove item?</string>
@@ -42,12 +42,12 @@
         <string name="str_select_item_to_remove">Select item to remove</string>      
     <string-array name="delete_problems">
         <item >--</item>
-        <item >Unable to delete. Trip is used in receipts</item>
-        <item >Unable to delete. Person is used in trips</item>
+        <item >Unable to delete. Trip contains receipts</item>
+        <item >Unable to delete. Person participates in trips</item>
         <item >Unable to delete. Currency is used in receipts</item>
     </string-array>
         <string name="strDescription">Description:</string>
-        <string name="toast_person_is_used">Unable to uncheck. Unchecked person was used in receipts.</string>
+        <string name="toast_person_is_used">Unable to uncheck. Person that you want ot uncheck is in receipts</string>
         <string name="name_is_empty">Unable to save. Name is empty</string>
         <string name="no_action_on_tap_label">No action on tap. Use menu or long tap to edit or remove</string>
         <string name="tap_on_item_to_show_calculation">Tap on item to show trip calculation</string>
@@ -61,10 +61,10 @@
             <item >Don\'t show this message again.</item>
         </string-array>
         <string name="total_str">Total: </string>
-        <string name="str_insert_basic_value">Insert your basic value</string>
+        <string name="str_insert_basic_value">Insert your prime currency</string>
          <string name="str_fill_fields">Please fill the fields</string>
          <string name="strUsedIn">Used in:</string>
-         <string name="str_was_buyer">Bought (times):</string>
+         <string name="str_was_buyer">Paid (times):</string>
          <string name="str_use_times">Used (times):</string>
          <string name="str_total_spent">Total spent:</string>
          <string name="str_are_you_sure">Are you sure that you want to quit?</string>
@@ -72,7 +72,7 @@
          <string name="str_changes_save">Changes wasn\'t save. Continue?</string>
          <string name="str_select_all">Select all</string>
          <string name="str_help_item">Help</string>
-         <string name="str_help_text">1. To view calculation tap on nessecary trip in trips. \n2.Work with application. At first you should add currencies. After that add people. Now you can create trip. To make trip you should have at least two people. After trip creation you can add receipts to calculation. Now tap on trip and you will see the calculation.</string>
+         <string name="str_help_text">1. To view calculation tap on nesecсary trip in trips. \n2.Work with application. At first you should add currencies. After that add people. Now you can create trip. To make trip you should have at least two people. After trip creation you can add receipts to calculation. Now tap on trip and you will see the calculation.</string>
 			<string name="str_add_people">Add people</string>
 			<string name="str_add_trips">Add trips</string>
 			<string name="str_add">Add</string>
@@ -80,7 +80,7 @@
 			<string name="str_finish">Finish</string>
 			<string name="first_st_not_caption">Add data</string>
 			<string name="first_st_people">To work with app you should add at least two people</string>
-			<string name="first_st_travel">To work with app you should add at first trip</string>
+			<string name="first_st_travel">To work with app you should add trip at first</string>
 			<string name="first_st_receipts">Now add receipts please</string>
 			<string name="first_st_view_calculation">To view calculation tap the trip</string>
 			<string name="first_st_view_caption">View results</string>
