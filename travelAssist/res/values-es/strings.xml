@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Facturas calculadora</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="labPersons">Personas</string>
+    <string name="labTrips">Viajes</string>
+    <string name="labReceipts">Facturas</string>
+    <string name="strValue">Valor:</string>
+    <string name="strCurrency">Moneda:</string>
+    <string name="strWhoBuy">Quien compro:</string>
+    <string name="strWhoUse">Quien utilizo:</string>
+    <string name="strNameOfTrip">Nombre del viaje:</string>
+    <string name="strUsersOfTrip">Viajeros:</string>
+    <string name="strNameOfPerson">Nombre:</string>
+    <string name="labCurrences">Monedas</string>
+    <string name="strCurrencyName">Nombre de la moneda</string>
+    <string name="strCurrencyShortName">Sigla de la moneda</string>
+    <string name="strConvertionToEur">Curso de la moneda</string>
+    <string name="tbtnAdd">Añadir</string>
+    <string name="tBtnEdit">Editar</string>
+    <string name="tBtnDelete">Eliminar</string>
+    <string name="tbtnAccept">Aceptar</string>
+    <string name="tbtnDecline">Anular</string>
+    <string name="secBasicInfo">Información básica:</string>
+    <string name="secCurrencyConvertion">Curso de la moneda:</string>
+    <string name="strTravelId">Identificacion del viaje</string>
+    <string name="remove_for_notify">Eliminar?</string>
+    <string name="remove_for_notify_text">Esta seguro que desea eliminar?</string>
+    <string name="no">No</string>
+    <string name="yes">Si</string>
+    <string name="contextRemove">Eliminar</string>
+    <string name="contextEdit">Editar</string>
+     <string name="accept">Aceptar</string>
+      <string name="strOk">OK</string>
+      <string name="decline">Anular</string>
+        <string name="to_string">A quien:</string>
+        <string name="from_string">De quien:</string>
+        <string name="str_select_item_to_edit">Seleccione el punto que dese editar</string>
+        <string name="str_select_item_to_remove">Seleccione el punto que dese eliminar</string>      
+    <string-array name="delete_problems">
+        <item >--</item>
+        <item >No se puede eliminar, existen facturas para este viaje</item>
+        <item >No se puede eliminar, la persona existe para este viaje</item>
+        <item >No se puede eliminar, La moneda se utiliza en la factura</item>
+    </string-array>
+        <string name="strDescription">Descripción:</string>
+        <string name="toast_person_is_used">No se puede eliminar a la persona, el existe en las facturas para este viaje</string>
+        <string name="name_is_empty">No se puede guardar, indique el nombre</string>
+        <string name="no_action_on_tap_label">No action on tap. Use menu or long tap to edit or remove</string>
+        <string name="tap_on_item_to_show_calculation">Tap on item to show trcalculation</string>
+        <string name="select_item_to_edit_label">indique el punto a redactar</string>
+        <string name="select_item_to_remove_label">Indique el punto a borrar</string>
+        <string name="toast_fill_all_of_the_strings">No se puede guardar, llene todos los puntos</string>
+        <string name="select_at_least_two_people">No se puede guardar, indique como minimo dos personas</string>
+        <string name="toast_fill_value_string">No se puede guardar, llene el campo "sentido"</string>
+        <string name="toast_select_at_least_one_person">No se puede guardar, indique como minimo una persona</string>
+        <string-array name="dontshow">
+            <item >No mostrar este mensaje de nuevo.</item>
+        </string-array>
+        <string name="total_str">Total: </string>
+        <string name="str_insert_basic_value">Indique la moneda principal</string>
+         <string name="str_fill_fields">Por favor rellene todos los campos</string>
+         <string name="strUsedIn">Participa en:</string>
+         <string name="str_was_buyer">Compras (Numero):</string>
+         <string name="str_use_times">Usos (numero):</string>
+         <string name="str_total_spent">Total de los gastos:</string>
+         <string name="str_are_you_sure">Esta seguro que desea salir?</string>
+         <string name="str_quit_label">Salida</string>
+         <string name="str_changes_save">Los cambios no se guardaron, continuar?</string>
+         <string name="str_select_all">Seleccionar todo</string>
+         <string name="str_help_item">Ayuda</string>
+         <string name="str_help_text">Para ver el total de los gastos seleccione el viaje en la lista de viajes. /n2 Trabajar la aplicacion. Para empezar sellecione la moneda. Despues indicar las personas. Ahora usted puede adicionar un viaje. Agregue las facturas para el calculo total. Para ver la estadistica del viaje y el gasto total, seleccione el viaje de interes de la lista.</string>
+			<string name="str_add_people">Añadir persona</string>
+			<string name="str_add_trips">Añadir un viaje</string>
+			<string name="str_add">Añadir</string>
+			<string name="str_continue">Continuar</string>
+			<string name="str_finish">Terminar</string>
+			<string name="first_st_not_caption">Añadir información</string>
+			<string name="first_st_people">Para trabajar con la aplicacion se necesitan minimo dos personas. Añadalas de la lista de personas.</string>
+			<string name="first_st_travel">Para trabajar con la aplicacion, es necesario añadir un viajr. Añada un viaje de la lista de viajes.</string>
+			<string name="first_st_receipts">Ahora puede añadir facturas de la lista de su viaje</string>
+			<string name="first_st_view_calculation">Para ver el calculo de gastos, seleccione el nombre del viaje de la lista</string>
+			<string name="first_st_view_caption">Ver resultados</string>
+			<string name="str_first_value_ratio">No se puede guardar, el curso de la moneda base debe ser igual a 1</string>
+</resources>
