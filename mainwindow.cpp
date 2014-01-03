@@ -161,11 +161,21 @@ int MainWindow::dbInit()
     {
         qDebug()<<"We have a problem "<<db.lastError();
 
-        QMessageBox::warning(this,QString::fromLocal8Bit("Ошибка базы данных"),QString::fromLocal8Bit("Ошибка при подключении к базе данных, отчет будет выведен на печать через выбранный принтер! СООБЩИТЕ ОБ ИНЦЕДЕНТЕ АДМИНИСТРАТОРУ СИСТЕМЫ!"));
+        QMessageBox::warning(this,QString::fromLocal8Bit("Ошибка базы данных"),QString::fromLocal8Bit("Ошибка при подключении к базе данных, пробуем подключиться к резервной базе данных!"));
         printDataWithoutDB();
         ui->pushButton->setEnabled(false);
         ui->pushButton_2->setEnabled(false);
         ui->lineEdit->setEnabled(false);
+        db.setHostName(settings.value("redundand_host",QVariant("localhost")).toString());
+        bool ok = db.open(); /**< Create new boolean to contain result of opening andopen db */
+        if (!ok)
+        {
+        QMessageBox::warning(this,QString::fromLocal8Bit("Ошибка резервной базы данных"),QString::fromLocal8Bit("Ошибка при подключении к резервной базе данных, отчет будет выведен на печать через выбранный принтер! СООБЩИТЕ ОБ ИНЦЕДЕНТЕ АДМИНИСТРАТОРУ СИСТЕМЫ!"));
+        }
+        else{
+            QMessageBox::information(this,QString::fromLocal8Bit("Система подключена к резервной базе данных"),QString::fromLocal8Bit("Вы работаете с резервной базой данных! СООБЩИТЕ ОБ ИНЦЕДЕНТЕ АДМИНИСТРАТОРУ СИСТЕМЫ!"));
+            return 1;
+        }
         return 0;
     }
     return 1;
