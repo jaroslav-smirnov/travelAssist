@@ -40,6 +40,7 @@ bool fileEntry::fromString(QString Str)
     cFailure = params.value(6).trimmed();/**< Get the description of failure from list and trimm it to avoid empty chars at the end and start */
     description = params.value(7).trimmed();/**< Get the additional description from list and trimm it to avoid empty chars at the end and start */
 
+    isItWarned = isWarned();
 
     Str.chop(Str.length() - Str.lastIndexOf(",")); /**< Delete the checksum from initial string for result checking */
     int chksm = calcCode(Str); /**< Create new int to store the checksum of string */
@@ -60,6 +61,37 @@ int fileEntry::getId(){
     return idPoint;
 }
 
+bool fileEntry::isWarned (){
+    QSqlQuery query;
+    bool ok = query.exec("SELECT \"Limits\" FROM \"eBoxes\" WHERE \"NAME\"="+
+                         QString::number(idPoint)+" AND \"DIVISION\"="+QString::number(devision)+";");
+    if (!ok) {
+        //QMessageBox::warning(this,QString::fromLocal8Bit("Ошибка запроса к базе данных при получении информации об аварийных параметрах"),query.lastError().text());
+    }
+    if (!query.next()) return true;
+
+
+    QStringList limits = query.value(0).toString().trimmed().split("*");
+
+    qDebug()<<limits;
+    if (limits.size()!=4) return false;
+    float outStart = limits.at(0).toFloat();
+    float start = limits.at(1).toFloat();
+    float stop = limits.at(2).toFloat();
+    float outStop = limits.at(3).toFloat();
+    float val = getValueNumber();
+
+    qDebug()<<"Values: "<<outStart<<" "<<outStop<<" "<<start<<" "<<" "<<stop<<" "<<val<<" is it ok? "<<itsOk;
+
+    if ((val > outStart)&&(val<outStop))
+            this->itsOk = true;
+
+    qDebug()<<"Values: "<<outStart<<" "<<outStop<<" "<<start<<" "<<" "<<stop<<" "<<val<<" is it ok? "<<itsOk;
+
+    if (val>stop) return true;
+    if (val<start) return true;
+    return false;
+}
 
 
 int fileEntry::getDivision()
@@ -255,7 +287,10 @@ QString fileEntry::getString2WriteHTML(QString dName)
     QString outName = dName.trimmed() + " " + cPoint;
     //outName.trimmed();
 
-    if (itsOk)bufferStr.append("<tr bgcolor=#FFFFFF>");
+    if (itsOk){
+        if (this->isWarned())bufferStr.append("<tr bgcolor=#FFFF66>");
+        else bufferStr.append("<tr bgcolor=#FFFFFF>");
+    }
     else bufferStr.append("<tr bgcolor=#FF6347>");
     bufferStr.append("<td>" + QString::number(devision).rightJustified(2,QChar::fromAscii('0'))+
                                                   QString::number(idPoint).rightJustified(4,QChar::fromAscii('0')) + "</td><td>" +
@@ -318,6 +353,7 @@ QString fileEntry::getDimension()
 QString fileEntry::getQueryToSend(int curId)
 {
     /**< Return query with special string and private values */
+    isItWarned = isWarned();
     return "INSERT INTO public.\"points\" "
                          "("
                          "\"number\","
@@ -332,7 +368,8 @@ QString fileEntry::getQueryToSend(int curId)
                          "generation,"
                          "sweep_id,"
                          "division,"
-                         "\"humanNames\""
+                         "\"humanNames\","
+                         "coordinates"
                          ")"
                          "VALUES ( "
                          +QString::number(idPoint)+",'"
@@ -347,7 +384,8 @@ QString fileEntry::getQueryToSend(int curId)
                          + QString::number(vers)+ ","
                          + QString::number(curId)+ ","
                          + QString::number(devision)+ ",'"
-                         + cPoint + "');";
+            + cPoint + "','" + QString::number(this->isWarned())+"');";
+
 
 }
 
