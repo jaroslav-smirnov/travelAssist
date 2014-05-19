@@ -39,6 +39,8 @@ private:
 public:
     fileEntry();
     bool fromString(QString String);
+    bool fromODGSweepPoint();
+
     int getId();
     int getVersion();
     QDate getDate();

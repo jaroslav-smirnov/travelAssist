@@ -14,8 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //qDebug()<<XORkey("0000")<<XORkey(XORkey("0000"));
 
     //ui->label_6->setVisible(false);
-    qDebug()<<QApplication::applicationDirPath();
-    qDebug()<<QApplication::libraryPaths();
+   // qDebug()<<QApplication::applicationDirPath();
+    //qDebug()<<QApplication::libraryPaths();
     x.log = &log;
     if (!dbInit()){
         ui->pushButton->setEnabled(false);
@@ -92,7 +92,7 @@ bool MainWindow::checkExists(int id, int generation, int division,QDate date, QT
         qDebug()<<"Error "<<query.lastError();
         QMessageBox::warning(this,QString::fromLocal8Bit("Ошибка запроса к базе данных"),query.lastError().text());
 
-        qDebug()<<query.result();
+        //qDebug()<<query.result();
 
         return false;
     }
@@ -105,7 +105,7 @@ bool MainWindow::checkExists(int id, int generation, int division,QDate date, QT
         {
             qDebug()<<"Error "<<query.lastError();
             QMessageBox::warning(this,QString::fromLocal8Bit("Ошибка запроса к базе данных"),query.lastError().text());
-            qDebug()<<query.result();
+            //qDebug()<<query.result();
             return false;
         }
         return true;
@@ -250,17 +250,18 @@ bool MainWindow::workWithFile(QString string, bool test)
     out.setCodec("UTF-8");  /**< Set codec to UTF-8 */
     //out.readLine(); /**< Read line from stream */
     QString line;  /**< Create new string to contain the lines */
+
     while (!out.atEnd()) /**< Read the all file */
     {
         line  = out.readLine(); /**< Set Buffer string to text line from mobile device */
 
-        qDebug()<<"our line is "<< line;
+        //qDebug()<<"our line is "<< line;
         if (!buf.fromString(line)) return false;  /**< Get data to buf from string if it is false stop function with false */
 
-        qDebug()<< "Is it name of worker?";
+        //qDebug()<< "Is it name of worker?";
         if (buf.getId() == 0)  /**< If the id 0, this string contains name of worker */
         {nameOfworker = buf.getPointName();
-            qDebug()<< "yes it is " <<nameOfworker;
+            //qDebug()<< "yes it is " <<nameOfworker;
         }
         else
         {
@@ -299,8 +300,12 @@ bool MainWindow::workWithFile(QString string, bool test)
     finishLines(nameOfworker,nameOfMaster);
 
 
+
     if (!test)     sendEMAILSifNess(&alarmStrHTML);
+
     file.close();  /**< Close the file */
+
+   // QSqlDatabase::database().commit();
     return true;  /**< Return true */
 
 
@@ -394,6 +399,14 @@ void MainWindow::pushTest(){
 void MainWindow::onButtonClick(bool test)
 {
 
+    /*Add transaction*/
+
+    QSqlDatabase::database().transaction();
+    qDebug()<<"Start transaction";
+    /**************************************************///////////*/
+
+
+
     //if (test) QMessageBox::warning(this, QString::fromLocal8Bit("Тест"),QString::fromLocal8Bit("Режим теста"));
     //this->cleanValues();
 
@@ -443,6 +456,9 @@ void MainWindow::onButtonClick(bool test)
         /************************************************************************************/
         return;
     }
+    /**********************************************///////////////
+
+
     addNewSweep(operODG, ui->label_5->text());
     printDialogExec();  /**< Execute printer function to show output*/
     if (willSign)
@@ -470,7 +486,7 @@ void MainWindow::onButtonClick(bool test)
 
     }
     /*********************************************************************/
-    QMessageBox::information(this, QString::fromLocal8Bit("Данные добавлены"),QString::fromLocal8Bit("Данные успешно внесены в базу данных"));
+   // QMessageBox::information(this, QString::fromLocal8Bit("Данные добавлены"),QString::fromLocal8Bit("Данные успешно внесены в базу данных"));
 
     QProcess::startDetached("odgView.exe");
 
@@ -494,7 +510,7 @@ bool MainWindow::fillByPoint(fileEntry entry)
                                                 QString::fromLocal8Bit("Цифровая подпись строки нарушена"));
     if (ok)return true;
     qDebug()<<query.lastError();
-    qDebug()<<" Error in filling ";
+    //qDebug()<<" Error in filling ";
     QMessageBox::warning(this,QString::fromLocal8Bit("Ошибка запроса к базе данных"),query.lastError().text());
     log.addEvent(query.lastError().text());
     return false;
@@ -570,7 +586,7 @@ void MainWindow::addToString(QString str, int division)
         ValuesToSweep[division] = getPointsToSweep(division);
     }
     ValuesToPrint[division]->append(str);
-    qDebug()<<"This is number for remove" << str.mid(24,6);
+    //qDebug()<<"This is number for remove" << str.mid(24,6);
     removeFromSweep(str.mid(24,6), division);
 
     numberOfpoints[division]++;
@@ -578,6 +594,8 @@ void MainWindow::addToString(QString str, int division)
 
 void MainWindow::finishLines(QString nameOfworker, QString nameOfMaster)
 {
+    this->oneEmailNameOfMaster = nameOfMaster;
+    this->oneEmailNameOfOper = nameOfworker;
     for (int i=0; i<100;i++)
     {
         if (ValuesToPrint[i]!=0x0)
@@ -628,7 +646,7 @@ void MainWindow::alarmData ()
             buffer.remove("<br><br>");
             buffer.remove("</h2><h2>");
             buffer.remove(QString::fromLocal8Bit("Результат обхода системы."));
-            qDebug()<<buffer;
+            //qDebug()<<buffer;
             QMessageBox::warning(this,QString::fromLocal8Bit("Предварительный просмотр отчета"),buffer);
             }
     }
@@ -649,7 +667,7 @@ QString MainWindow::dataListToString(QStringList *slst)
         result.append("</td></tr>");
     }
     result.append("</table>");
-    qDebug()<<result;
+    //qDebug()<<result;
     return result;
 }
 
@@ -681,8 +699,37 @@ void MainWindow::sendEMAILSifNess(QString *alStrHtml)
         line ="";
     }
 
+    /*Вариант единого письма. Состоит из шапки с информацией, кто произвел обход и кто принял.
+      После этого список подразделений которые обходились. После этого список точек которые не обходились, но были в
+      начатых подразделениях. После этого информация по подразделениям разбитая на группы*/
 
+    QString oneEmailHeaders = QString::fromLocal8Bit("<h2>Результаты нового обхода.</h2>");
+    QString oneEmailDivisions = QString::fromLocal8Bit("<h2>Подразделения в которых производился обход</h2><ol>");
+QString oneEmailLoosedPoints= QString::fromLocal8Bit("<h2>Точки, которые не были пройдены в подразделениях в которых производился обход. </h2><br/>");
+QString oneEmailData = QString::fromLocal8Bit("<h2>Численные результаты по подразделениям</h2>");
+QString oneEmailAlarms = QString::fromLocal8Bit("<h3>Выявленные дефекты </h3>")+*alStrHtml;
+QString oneEmailText;
 
+QString oneEmailBufStart = QString::fromLocal8Bit("<table border=\"0\" cellspacing=\"0\" cellpadding=\"5\"><tr><td>Обход выполнил</td>");
+QString oneEmailBufStart_2= QString::fromLocal8Bit("<table border=\"0\" cellspacing=\"0\" cellpadding=\"5\"><tr><td>");
+QString oneEmailBufStop = "</table>";
+
+/*Delete footer from oneEmailAlarms*/
+int oneEmailStartIndex = oneEmailAlarms.indexOf(oneEmailBufStart);
+int oneEmailStopIndex = oneEmailAlarms.indexOf(oneEmailBufStop, oneEmailStartIndex);
+oneEmailAlarms.remove(oneEmailStartIndex, oneEmailStopIndex - oneEmailStartIndex);
+
+/****************************************/
+
+int oneEmailPointCount = 0;
+QSet<QString> oneEmailEmails;
+
+            oneEmailHeaders.append("<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">");
+            oneEmailHeaders.append("<tr><td>"+ QString::fromLocal8Bit("Обход совершил:")+"</td><td>" +this->oneEmailNameOfOper +"</td><td>" +
+                                   QDate::currentDate().toString("dd.MM.yyyy") + "</td></tr>");
+            oneEmailHeaders.append("<tr><td>"+ QString::fromLocal8Bit("Внес данные в базу данных:")+"</td><td>"+ this->oneEmailNameOfMaster +"</td><td>" +
+                                     QDate::currentDate().toString("dd.MM.yyyy") + "</td></tr>");
+            oneEmailHeaders.append("</table>");
 
 
     /*****************************************************************/
@@ -691,6 +738,44 @@ void MainWindow::sendEMAILSifNess(QString *alStrHtml)
     {
         if (ValuesToPrint[i]!=0x0)
         {
+            oneEmailDivisions.append("<li>"+getNameOfDivision(i)+"</li>");
+/*Add loosed points*/
+            if (ValuesToSweep[i]->length() == 0 ) {
+
+            }else oneEmailLoosedPoints.append(QString::fromLocal8Bit("<h3>")+getNameOfDivision(i)+QString::fromLocal8Bit(": не пройдено ")
+                                    + QString::number(ValuesToSweep[i]->length())
+                                    + QString::fromLocal8Bit(" точек!</h3> <table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">"));
+
+            for (int j = 0; j < ValuesToSweep[i]->length(); j++)
+            {
+                oneEmailLoosedPoints.append("<tr><td>");
+                oneEmailLoosedPoints.append(ValuesToSweep[i]->at(j));
+                oneEmailLoosedPoints.append("</td></tr>");
+            }
+            oneEmailLoosedPoints.append("</table>");
+
+
+/*/////loosed points*/
+
+/*Точки с данными*/
+            QString oneEmailDataBuffer = ValuesToPrint[i]->replace("<h2>","<h3>").replace("</h2>","</h3>");
+
+            oneEmailStartIndex = oneEmailDataBuffer.indexOf(oneEmailBufStart);
+            oneEmailStopIndex = oneEmailDataBuffer.indexOf(oneEmailBufStop, oneEmailStartIndex);
+            oneEmailDataBuffer.remove(oneEmailStartIndex, oneEmailStopIndex - oneEmailStartIndex);
+
+            oneEmailStartIndex = oneEmailDataBuffer.indexOf(oneEmailBufStart_2);
+            oneEmailStopIndex = oneEmailDataBuffer.indexOf(oneEmailBufStop, oneEmailStartIndex);
+            oneEmailDataBuffer.remove(oneEmailStartIndex, oneEmailStopIndex - oneEmailStartIndex);
+
+
+            oneEmailData.append("<h3>"+getNameOfDivision(i)+"</h3>");
+            oneEmailData.append(oneEmailDataBuffer);
+
+
+            oneEmailPointCount+=(oneEmailDataBuffer.count("</tr>") - 1);
+
+/*Точки с данными*/
             /*qDebug()<<"SELECT \"bosesForReport\".\"To\" FROM public.\"bosesForReport\""
                                         "WHERE \"bosesForReport\".reports LIKE '%"
                                         + QString::number(i).rightJustified(2,QChar('0'))
@@ -709,16 +794,58 @@ void MainWindow::sendEMAILSifNess(QString *alStrHtml)
             {
                 while (query.next()) {
                     email = query.value(0).toString().trimmed();
+
+/*Create list of unique emails*/
+                    oneEmailEmails.insert(email);
+/*****************************************************/
                     // qDebug()<<email;
-                    x.send_data(*ValuesToPrint[i] + line, email);
+                    //x.send_data(*ValuesToPrint[i] + line, email);
                 }
 
             }
-            else
-                qDebug()<<"Nobody is interested in "<<i;
+            else{}
+               // qDebug()<<"Nobody is interested in "<<i;
         }
     }
 
+    oneEmailDivisions.append("</ol>");
+    /*************************Now we create output email and send it****************/
+oneEmailText.append(oneEmailHeaders);
+oneEmailText.append(QString::fromLocal8Bit("<p>Всего пройдено точек: ") + QString::number(oneEmailPointCount));
+oneEmailText.append(oneEmailAlarms);
+oneEmailText.append(oneEmailDivisions);
+oneEmailText.append(oneEmailLoosedPoints);
+oneEmailText.append(oneEmailData);
+
+qDebug()<<oneEmailText;
+
+QTextDocument *oneEmailTextDocument = new QTextDocument(this);
+oneEmailTextDocument->setHtml(oneEmailText);
+insertView.setView(oneEmailTextDocument);
+insertView.show();
+QEventLoop loop;
+connect (&insertView, SIGNAL (readyOk()), &loop, SLOT(quit()));
+connect (&insertView, SIGNAL (readyNo()), &loop, SLOT(quit()));
+qDebug()<<"Start loop";
+loop.exec();
+qDebug()<<"Stop loop";
+
+if (!insertView.isAccepted()) {
+    qDebug()<<"data is not accepted rollback";
+    QSqlDatabase::database().rollback();
+    return;
+}
+else{
+qDebug()<<"data is accepted commit";
+QSqlDatabase::database().commit();
+}
+QString oneEmailsOneEmail;
+foreach(oneEmailsOneEmail, oneEmailEmails)
+{
+    x.send_data(oneEmailText, oneEmailsOneEmail);//,QString::fromLocal8Bit("ODGАссист. Новые данные. Выполнил: ")+oneEmailNameOfOper);
+}
+
+/*******************************************************************************************/
     ok = query.exec("SELECT \"bosesForReport\".\"To\" FROM public.\"bosesForReport\""
                     "WHERE \"bosesForReport\".alarms LIKE '%1%';");
 
@@ -730,19 +857,19 @@ void MainWindow::sendEMAILSifNess(QString *alStrHtml)
     }
 
 
-    qDebug()<<"Email "<<*alStrHtml;
+    //qDebug()<<"Email "<<*alStrHtml;
     if (query.size()>0)
     {
         while (query.next()) {
             email = query.value(0).toString().trimmed();
             //qDebug()<<email;
-            x.send_data(*alStrHtml, email.trimmed());
+            //x.send_data(*alStrHtml, email.trimmed());
 
         }
 
     }
-    else
-        qDebug()<<"Nobody is interested in ";
+    else{}
+        //qDebug()<<"Nobody is interested in ";
 
 }
 
@@ -919,4 +1046,26 @@ QString MainWindow::XORkey(QString data)
     }
 
     return outString;
+}
+void MainWindow::closeEvent(QCloseEvent *event){
+    /*if(x.isFree()){
+        event->accept();
+    }
+    else
+    {
+        QMessageBox::warning(this, QString::fromLocal8Bit("Приложение не завершило передачу данных"),
+                             QString::fromLocal8Bit("Приложение не завершило передачу данных по"
+                                                    " электронной почте, повторите попытку закрытия позже"));
+    }*/
+    qDebug()<<"on close";
+    long i = 0;
+
+    while (!x.isFree())
+    {
+        i++;
+        if (i > 30000000)
+            break;
+    }
+    event->accept();
+
 }

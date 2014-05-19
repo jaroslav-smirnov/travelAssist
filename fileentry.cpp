@@ -9,6 +9,37 @@ fileEntry::fileEntry()
 {
 }
 
+bool fileEntry::fromODGSweepPoint(){
+
+    wString = params.value(0);/**< Get the id of current point from string list */
+    vers = wString.mid(0,1).toInt();/**< Get the version of barcode from id of current point */
+    devision = wString.mid(1,2).toInt();/**< Get the division of code*/
+    idPoint = wString.mid(3,4).toInt();/**< Get the number of point from ID */
+    cDate = QDate::fromString(params.value(1).trimmed(),"d.M.yyyy");/**< Get the date of point scanning */
+    cTime = QTime::fromString(params.value(2).trimmed(),"h:m:s");/**< Get the time of point scanning */
+    cPoint = params.value(3).trimmed();/**< Get the "human" point name from string list */
+    value = params.value(4).trimmed();/**< Get value of point in string format*/
+
+    if (params.value(5).trimmed().length() < 8) /**< Check length of entry in string list which are connected with failure */
+            itsOk = false;/**< If it is shorter than 8 failure */
+        else
+            itsOk = true; /**< Else it's Ok */
+
+    cFailure = params.value(6).trimmed();/**< Get the description of failure from list and trimm it to avoid empty chars at the end and start */
+    description = params.value(7).trimmed();/**< Get the additional description from list and trimm it to avoid empty chars at the end and start */
+
+    isItWarned = isWarned();
+
+    Str.chop(Str.length() - Str.lastIndexOf(",")); /**< Delete the checksum from initial string for result checking */
+    int chksm = calcCode(Str); /**< Create new int to store the checksum of string */
+    CHKSUM = params.value(8);/**< Get the checksum value from list */
+    if (CHKSUM.toInt() == chksm) /**< Compare calculated value and stored value */
+        codeCorr = true;
+    else
+        codeCorr = false;
+    return true;/**< All is good return true */
+
+}
 
 /**
  * @brief Used to get data from string to fileEntry class

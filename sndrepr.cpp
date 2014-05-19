@@ -6,6 +6,7 @@ sndRepr::sndRepr(QWidget *parent) :
     ui(new Ui::sndRepr)
 {
     ui->setupUi(this);
+    freec = true;
     connect(&tcpSocket,SIGNAL(connected()),this,SLOT(onConnected()));
     connect(&tcpSocket,SIGNAL(readyRead()),this,SLOT(onDataGet()));
     connect(&tcpSocket,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(newError(QAbstractSocket::SocketError)));
@@ -22,22 +23,20 @@ void sndRepr::send_data(QString data, QString to_email)
 {
     freec = false;
     //qDebug()<<"executed";
-    lst<<"EHLO yandex.ru\r\n";
-    lst<<"AUTH LOGIN\r\n";
-    lst<<"amFyb3NsYXYuc21pcm5vdi5r\r\n";
-    lst<<"SkExcm8yU2w=\r\n";
+    lst<<"EHLO polysan.ru\r\n";
     lst<<"mail from:<jaroslav.smirnov.k@yandex.ru>\r\n";
     lst<<"rcpt to:<" + to_email + ">\r\n";
     lst<<"data\r\n";
-    lst<<"To: " + to_email + "\r\n"
-         "Content-type: text/html; charset=\"utf8\"\r\n"
-         "Subject: Information from ODG control \r\n"
-         "From: jaroslav.smirnov.k@yandex.ru\r\n\r\n" +
+    lst<<"MIME-Version: 1.0\r\n"
+          "Content-type: text/html; charset=\"windows-1251\"\r\n"
+          "Subject: Information from ODG control \r\n"
+          "To: " + to_email + "\r\n"
+         "From: ya_smirnov@polysan.ru\r\n\r\n<html>" +
          data +
-         "\r\n.\r\n";
+         "</html>\r\n.\r\n";
     qDebug()<<tcpSocket.state();
     if (tcpSocket.state()==QAbstractSocket::UnconnectedState)
-        tcpSocket.connectToHost("smtp.yandex.ru",25);
+        tcpSocket.connectToHost("192.168.1.230",25);
 
 }
 void sndRepr::onConnected()
@@ -52,7 +51,7 @@ void sndRepr::onDataGet()
     if (i<lst.length())
     {
         //qDebug()<<lst.at(i).toUtf8();
-        tcpSocket.write(lst.at(i).toUtf8());
+        tcpSocket.write(lst.at(i).toLocal8Bit());
         i++;
     }
     else
@@ -62,6 +61,9 @@ void sndRepr::onDataGet()
         lst.clear();
         tcpSocket.write(QString("quit").toAscii());
         tcpSocket.disconnectFromHost();
+        QMessageBox::information(this, QString::fromLocal8Bit("Информация отправлена"),
+                                 QString::fromLocal8Bit("Информация об обходе отправлена инженерам по направлению"));
+        freec = true;
     }
 
 }

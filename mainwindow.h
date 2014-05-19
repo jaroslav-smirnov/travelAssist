@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include <QEventLoop>
 #include <QtSql>
 #include <QSqlDatabase>
 #include <QMessageBox>
@@ -13,10 +13,13 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QTextStream>
+#include <QSet>
+#include <QCloseEvent>
 
 #include <QSettings>
 
 #include "logger.h"
+#include "odginsertview.h"
 
 
 
@@ -74,6 +77,7 @@ public:
     QString reportSweepsHTML(int id);
     QString prepareDocumentForSign();
     QString signDocument(QString textToSign);
+    void closeEvent(QCloseEvent *);
 
 private:
     Ui::MainWindow *ui;
@@ -84,6 +88,9 @@ private:
     int numberOfpoints[100];
     QString WORK_DIR;
 
+    QString oneEmailNameOfMaster;
+    QString oneEmailNameOfOper;
+
     int alarmsCount;
 
     void printDataWithoutDB();
@@ -92,6 +99,7 @@ private:
     logger log;
 
     QString globalLetter;
+    ODGInsertView insertView;
 
     QTextDocument doc2print; /**< Global. Document to storage text to print */
     QErrorMessage errorMessageDialog; /**< Global. Message about wrong checkcode */

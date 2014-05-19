@@ -16,16 +16,19 @@ SOURCES += main.cpp\
     sndrepr.cpp \
     logger.cpp \
     getpointslistfromdb.cpp \
-    outputtemplate.cpp
+    outputtemplate.cpp \
+    odginsertview.cpp
 
 HEADERS  += mainwindow.h \
     fileentry.h \
     sndrepr.h \
     logger.h \
     getpointslistfromdb.h \
-    outputtemplate.h
+    outputtemplate.h \
+    odginsertview.h
 
 FORMS    += mainwindow.ui \
-    sndrepr.ui
+    sndrepr.ui \
+    odginsertview.ui
 
 
