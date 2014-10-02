@@ -1,0 +1,1 @@
+orpt\RPTrender.exe -databaseURL=psql://192.168.0.238/factory:5432 -username="head" -passwd="0000" -loadfromdb="UNP-daily-steading" -param=categ_id:integer=30
